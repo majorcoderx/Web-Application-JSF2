@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+<h:head>
+	<title>Create Project</title>
+	<h:outputStylesheet name="grid/grid.css" library="primefaces" />
+</h:head>
+<h:body style="background-color: #69f0ae; width: auto;">
+	<div class="ui-grid ui-grid-responsive">
+		<div style="background-color: #880e4f; width: 100%">
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-4">
+					<p:graphicImage value="/images/fpt1.png"
+						style="margin-left: 10px; height: 80px;margin-top: 10px;margin-bottom: 10px;" />
+				</div>
+				<div class="ui-grid-col-7">
+					<h:form style="font-size: 14px;">
+						<p:fieldset style="margin-top: 50px;">
+
+							<div class="ui-grid-col-2">
+								<p:commandLink value="Home Page"
+									style="width: 100%;margin-left: 5px; color: #e65100;" />
+							</div>
+							<div class="ui-grid-col-2">
+								<p:commandLink value="Projects"
+									action="#{viewProject.getAction}"
+									style="width: 100%;margin-left: 15px; color: #e65100;" />
+							</div>
+							<div class="ui-grid-col-2">
+								<p:commandLink value="Employees"
+									action="#{employeeManager.getAction}"
+									style="width: 100%;margin-left: 15px; color: #e65100;" />
+							</div>
+							<div class="ui-grid-col-2">
+								<p:commandLink value="Sal-emp"
+									style="width: 100%;margin-left: 15px; color: #e65100;" />
+							</div>
+							<div class="ui-grid-col-2">
+								<p:commandLink value="Department"
+									style="width: 100%;margin-left: 15px; color: #e65100;" />
+							</div>
+							<div class="ui-grid-col-2">
+								<p:commandLink value="My Profile"
+									action="#{viewProfile.getAction}"
+									style="width: 100%;margin-left: 15px;color: #e65100;" />
+							</div>
+						</p:fieldset>
+					</h:form>
+				</div>
+				<div class="ui-grid-col-1">
+					<h:form>
+						<div class="ui-grid-row">
+							<h:commandButton image="/images/password_icon.png"
+								style="margin-top:10px; width:70px; height: 40px;margin-left: 10px;" />
+						</div>
+						<div class="ui-grid-row">
+							<h:commandButton image="/images/logout.png"
+								action="#{navigate.logout}"
+								style="margin-top:10px; width:30px; height: 30px;margin-left: 10px;margin-bottom: 30px;" />
+						</div>
+					</h:form>
+				</div>
+			</div>
+		</div>
+		<div class="ui-grid-row">
+			<hr style="width: 2000px;"></hr>
+		</div>
+		<div class="ui-grid-row">
+			<center
+				style="margin-left: auto; margin-right: auto; margin-top: 3px; margin-bottom: 3px; text-align: center;">
+				<div class="ui-grid-col-4">
+
+					<h:form style="font-size: 12px;">
+						<p:dataTable var="dj" value="#{createProject.djList}">
+							<p:column headerText="Deptno">
+								<p:commandLink value="#{dj.dept.deptno}" />
+							</p:column>
+							<p:column headerText="Name">
+								<h:outputText value="#{dj.dept.dname}" />
+							</p:column>
+							<p:column headerText="Local">
+								<h:outputText value="#{dj.dept.loc}" />
+							</p:column>
+							<p:column headerText="Join">
+								<p:selectBooleanCheckbox value="#{dj.join}">
+									<p:ajax event="valueChange" update="assignform projform"
+										listener="#{createProject.addNewDepartment(dj.dept.deptno,dj.join)}" />
+								</p:selectBooleanCheckbox>
+							</p:column>
+						</p:dataTable>
+					</h:form>
+					<h:form id="projform" style="font-size: 12px; margin-top: 15px;">
+						<p:growl id="growl" showDetail="true" sticky="true" />
+
+						<p:panelGrid columns="2" style="width: 100%;">
+							<p:outputLabel value="Describle: " for="desc"
+								style="margin-left: 5px;" />
+							<p:inputText id="desc" required="true"
+								value="#{createProject.proj.describle}"
+								style="margin-left: 20px;width: 160px ;float: left;">
+								<p:ajax event="valueChange" />
+							</p:inputText>
+							<p:outputLabel value="Start date: " for="startdate"
+								style="margin-left: 5px;" />
+							<p:calendar id="startdate" value="#{createProject.proj.startDate}"
+								style="margin-left: 20px;width: 160px ;float: left;" />
+							<p:outputLabel value="End date: " for="enddate"
+								style="margin-left: 5px;" />
+							<p:calendar id="enddate" value="#{createProject.proj.endDate}"
+								style="margin-left: 20px;width: 130px ;float: left;" />
+							<p:outputLabel value="Budget no: " for="budget"
+								style="margin-left: 5px;" />
+							<p:inputText id="budget"
+								value="#{createProject.proj.budgetAmount}"
+								style="margin-left: 20px;width: 160px ;float: left;" />
+							<p:outputLabel value="Max no staff: " for="maxno"
+								style="margin-left: 5px;" />
+							<p:selectOneMenu id="maxno"
+								value="#{createProject.noStaffSelected}"
+								style="margin-left: 20px;width: 170px ;float: left;">
+								<p:ajax event="valueChange" update="assignform"
+									listener="#{createProject.changeMaxNoStaff}" />
+								<f:selectItems value="#{createProject.noStaffList}" />
+							</p:selectOneMenu>
+
+							<p:outputLabel value="Comments: " for="cmt"
+								style="margin-left: 5px;" />
+							<p:inputText id="cmt" value="#{createProject.proj.comment}"
+								style="margin-left: 20px;width: 160px ;float: left;">
+								<f:ajax event="change" />
+							</p:inputText>
+						</p:panelGrid>
+						<p:commandButton value="Submit"
+							action="result" update="growl" style="margin-top: 15px;"
+							actionListener="#{createProject.getSaveAction}" />
+						<p:commandButton value="Reset"
+							type="reset" style="margin-top: 15px;" />
+					</h:form>
+				</div>
+				<div class="ui-grid-col-8">
+					<h:form id="assignform" style="font-size: 12px; margin-left: 5px;">
+
+						<p:dataGrid var="asg" value="#{createProject.assignList}"
+							rows="6" columns="3" paginator="true"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="3,6,12">
+
+							<p:panel header="#{asg.user.deptno}" style="text-align:center">
+								<h:panelGrid columns="2" style="width:100%">
+									<p:outputLabel value="Empno: " for="empno" style="float: left;" />
+									<p:commandLink id="empno" value="#{asg.user.empno}"
+										style="float: right;" />
+									<p:outputLabel value="Ename: " for="ename" style="float: left;" />
+									<p:outputLabel id="ename" value="#{asg.user.ename}"
+										style="width:60px;float: right;" />
+									<p:outputLabel value="Job: " for="job" style="float: left;" />
+									<p:outputLabel id="job" value="#{asg.user.job}"
+										style="width:70px; float: right;" />
+
+									<p:outputLabel value="Detail: " style="float: left;"
+										for="detail" />
+									<p:commandLink id="detail" update=":assignform:staffDetail"
+										oncomplete="PF('staffDialog').show()" title="View Detail"
+										style="float: right;">
+										<p:graphicImage
+											style="width: 20px;height: 20px; float: right;"
+											value="/images/folder_search.png" />
+										<f:setPropertyActionListener value="#{asg}"
+											target="#{createProject.asgSelected}" />
+									</p:commandLink>
+
+									<p:outputLabel value="Join: " for="join" style="float: left;" />
+									<p:selectBooleanCheckbox id="join" value="#{asg.join}"
+										disabled="#{!createProject.checkAvailable}"
+										style="float: right;">
+										<p:ajax event="valueChange" update="projform assignform"
+											listener="#{createProject.changeUserJoinAction(asg.user.empno,asg.join)}" />
+									</p:selectBooleanCheckbox>
+								</h:panelGrid>
+							</p:panel>
+						</p:dataGrid>
+						<p:dialog id="staffDetail" header="#{createProject.asgSelected.user.ename}"
+							widgetVar="staffDialog" modal="true" showEffect="fade"
+							hideEffect="fade" resizable="false">
+							<p:outputPanel style="text-align:center;">
+								<p:panelGrid columns="2" columnClasses="label,value">
+									<p:outputLabel value="Hours: " for="hours" style="float: left;" />
+									<p:inputText id="hours"
+										value="#{createProject.asgSelected.hours}"
+										style="width:30px;float: right;" />
+									<p:outputLabel value="Bill: " for="bill" style="float: left;" />
+									<p:inputText id="bill"
+										value="#{createProject.asgSelected.billAmount}"
+										style="width:30px;float: right;"/>
+									<p:outputLabel value="Assign: " for="assign"
+										style="float: left;" />
+									<p:inputText id="assign"
+										value="#{createProject.asgSelected.assignType}"
+										style="width:30px;float: right;"/>
+									<p:outputLabel value="Join: " for="start" style="float: left;" />
+									<p:calendar id="start"
+										value="#{createProject.asgSelected.aStartDate}"
+										style="float: right;"/>
+									<p:outputLabel value="Out: " for="out" style="float: left;" />
+									<p:calendar id="out"
+										value="#{createProject.asgSelected.aEndDate}"
+										style="float: right;"/>
+										<p:outputLabel value="Save: " for="save"/>
+									<p:commandButton id="save" image="/images/save.png" value="Submit" action="result"
+									actionListener="#{createProject.updateAssignList}" />
+								</p:panelGrid>
+							</p:outputPanel>
+						</p:dialog>
+					</h:form>
+				</div>
+			</center>
+		</div>
+	</div>
+</h:body>
+</html>

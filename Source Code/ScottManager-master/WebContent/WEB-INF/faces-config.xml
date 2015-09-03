@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+	
+	<faces-config-extension>
+  		<facelets-processing>
+    		<file-extension>.xhtml</file-extension>
+    		<process-as>xhtml</process-as>
+  		</facelets-processing>
+	</faces-config-extension>
+	
+	<navigation-rule>
+		<from-view-id>Views/Share/index.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>presidenthome</from-outcome>
+			<to-view-id>Views/Personalized/prehome.xhtml?faces-redirect=true</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>managerhome</from-outcome>
+			<to-view-id>Views/Personalized/manhome.xhtml?faces-redirect=true</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>otherhome</from-outcome>
+			<to-view-id>Views/Personalized/otherhome.xhtml?faces-redirect=true</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+</faces-config>

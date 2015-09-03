@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Company Login Page</title>
+</h:head>
+<h:body style="background-color: #880e4f;">
+	
+	<h:form id="formlogin">
+		<div style="margin-top: 80px; height: 300px; font-size: 14px;">
+			<h:graphicImage value="/images/fpt1.png"
+				style="margin-top: 30px;margin-left: 100px; width: 400px; height: 100px;" />	
+			<center>
+				<p:fieldset
+					style="color: blue; width: 350px; background-color: #E0E0E0;">
+					<h:panelGrid>
+						<p:outputLabel value="ID: " />
+						<p:inputText id="id" style="height: 20px; width: 250px"
+							value="#{login.id}" rendered="true" />
+						<p:outputLabel value="Password: " />
+						<p:password style="height: 20px; width: 250px"
+							value="#{login.password}" rendered="true" />
+						<p:commandButton style="height: 30px; width: 150px;" value="Login"
+							update="msg" action="#{login.getAction}"/>
+						<p:outputLabel id="msg" value="#{login.msg}" style="color: red; font-size: 16px;" />
+					</h:panelGrid>
+				</p:fieldset>
+			</center>
+		</div>
+	</h:form>
+</h:body>
+</html>

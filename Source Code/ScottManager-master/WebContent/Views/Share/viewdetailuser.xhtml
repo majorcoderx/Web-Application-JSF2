@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Detail User</title>
+	<h:outputStylesheet name="grid/grid.css" library="primefaces" />
+</h:head>
+<h:body style="background-color: #69f0ae; width: auto;">
+	<div class="ui-grid ui-grid-responsive">
+		<div style="background-color: #880e4f; width: 100%">
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-4">
+					<p:graphicImage value="/images/fpt1.png"
+						style="margin-left: 10px; height: 80px;margin-top: 10px;margin-bottom: 10px;" />
+				</div>
+				<div class="ui-grid-col-7">
+					<h:form style="font-size: 14px;">
+						<p:fieldset style="margin-top: 50px;">
+
+							<div class="ui-grid-col-2">
+								<p:commandLink value="Home Page"
+									style="width: 100%;margin-left: 5px; color: #e65100;" />
+							</div>
+							<div class="ui-grid-col-2">
+								<p:commandLink value="Projects"
+									action="#{viewProject.getAction}"
+									style="width: 100%;margin-left: 15px; color: #e65100;" />
+							</div>
+							<div class="ui-grid-col-2">
+								<p:commandLink value="Employees"
+									action="#{employeeManager.getAction}"
+									style="width: 100%;margin-left: 15px; color: #e65100;" />
+							</div>
+							<div class="ui-grid-col-2">
+								<p:commandLink value="Sal-emp"
+									style="width: 100%;margin-left: 15px; color: #e65100;" />
+							</div>
+							<div class="ui-grid-col-2">
+								<p:commandLink value="Department"
+									style="width: 100%;margin-left: 15px; color: #e65100;" />
+							</div>
+							<div class="ui-grid-col-2">
+								<p:commandLink value="My Profile"
+									action="#{viewProfile.getAction}"
+									style="width: 100%;margin-left: 15px;color: #e65100;" />
+							</div>
+						</p:fieldset>
+					</h:form>
+				</div>
+				<div class="ui-grid-col-1">
+					<h:form>
+						<div class="ui-grid-row">
+							<h:commandButton image="/images/password_icon.png"
+								action="#{navigate.aChangePassword}"
+								style="margin-top:10px; width:70px; height: 40px;margin-left: 10px;" />
+						</div>
+						<div class="ui-grid-row">
+							<h:commandButton image="/images/logout.png"
+								action="#{navigate.logout}"
+								style="margin-top:20px; width:30px; height: 30px;margin-left: 10px;margin-bottom: 30px;" />
+						</div>
+					</h:form>
+				</div>
+			</div>
+		</div>
+		<div class="ui-grid-row">
+			<hr style="width: 2000px;"></hr>
+		</div>
+		<div class="ui-grid-row">
+			<center
+				style="margin-left: auto; margin-right: auto; margin-top: 3px; margin-bottom: 3px; text-align: center;">
+				<div class="ui-grid-col-6">
+					<h:form>
+					<p:growl id="growl" showDetail="true" sticky="true" />
+						<p:fieldset
+							style="font-size: 15px; margin-top: 20px; width: 420px;">
+							<br><p:outputLabel value="ID: " for="empno"
+									style="margin-left: 5px;float: left;" /> <p:inputText
+									disabled="true" id="empno" value="#{viewDetailUser.user.empno}"
+									style="margin-right: 15px;width: 165px ;float: right;" /> </br>
+							<br><p:outputLabel value="Name: " for="ename"
+									style="margin-left: 5px; float: left;" /> <p:inputText disabled="#{!viewDetailUser.director}"
+									id="ename" required="true" value="#{viewDetailUser.user.ename}"
+									style="margin-right: 15px;width: 165px ;float: right;">
+								</p:inputText></br>
+						</p:fieldset>
+						<p:fieldset
+							style="font-size: 15px; margin-top: 10px; width: 420px;">
+							<br> <p:outputLabel value="Job: " for="job"
+									style="margin-left: 5px;float: left;" /> 
+									<p:selectOneMenu id="job" value="#{viewDetailUser.job}" disabled="#{!authories.mgr}"
+										style="margin-right: 15px;width: 172px ;float: right;">
+										<p:ajax event="valueChange" listener="#{viewDetailUser.changeJob(viewDetailUser.job)}"/>
+										<f:selectItems value="#{viewDetailUser.jlist}"/>	
+									</p:selectOneMenu> </br>
+							<br> <p:outputLabel value="Department: " for="dept"
+									style="margin-left: 5px;float: left;" /> 
+									<p:selectOneMenu
+									disabled="#{!authories.pre}" id="dept" value="#{viewDetailUser.dname}"
+									style="margin-right: 15px;width: 172px ;float: right;">
+									<p:ajax event="valueChange" update="loc manager"
+										listener="#{viewDetailUser.changeDept(viewDetailUser.dname)}" />
+									<f:selectItems value="#{viewDetailUser.dList}" />
+								</p:selectOneMenu> 
+								</br>
+							<br> <p:outputLabel value="Manager: " for="manager"
+									style="margin-left: 5px;float: left;" /> <p:inputText
+									disabled="true" id="manager" value="#{viewDetailUser.mgr}"
+									style="margin-right: 15px;width: 165px ;float: right;" /> </br>
+							<br><p:outputLabel value="Director: " for="dir"
+									style="margin-left: 5px;float: left;" /> 
+									<p:selectOneMenu effect="fold" editable="true" value="#{viewDetailUser.dir.ename}" 
+									disabled="#{!authories.mgr}" id="dir" 
+									style="margin-right: 15px;width: 172px ;float: right;" >
+										<f:selectItems value="#{viewDetailUser.listDir}" var="dir" itemLabel="#{dir.ename}"/>
+										<p:ajax event="valueChange" update="loc manager" listener="#{viewDetailUser.changeDirector(viewDetailUser.dir)}"/> 
+									</p:selectOneMenu></br>
+							<br><p:outputLabel value="Hire Date: " for="popup"
+									style="margin-left: 5px;float: left;" /> 
+									<p:calendar
+									disabled="#{!viewDetailUser.director}" id="popup"
+									value="#{viewDetailUser.user.hiredate}"
+									style="margin-right: 20px;width: 170px ;float: right;" /> </br>
+							<br><p:outputLabel value="Localtion: " for="loc"
+									style="margin-left: 5px;float: left;" /> <p:inputText
+									disabled="true" id="loc" value="#{viewDetailUser.dept.loc}"
+									style="margin-right: 15px;width: 165px ;float: right;"/> </br>
+						</p:fieldset>
+						<p:fieldset
+							style="font-size: 15px; margin-top: 10px; width: 420px;">
+							<p:commandButton disabled="#{!authories.pre}" update="growl" value="Submit"
+								action="result" actionListener="#{viewDetailUser.saveAction}" />
+							<p:commandButton disabled="#{!authories.pre}" value="Reset"
+								type="reset" />
+						</p:fieldset>
+					</h:form>
+				</div>
+				<div class="ui-grid-col-4">
+					<h:form>
+						<p:carousel style="height: 100%;margin-top: 20px;width: 450px;"
+							value="#{viewDetailUser.aList}" headerText="Project" var="proj"
+							numVisible="3">
+							<p:panelGrid>
+								<p:commandLink action="#{viewDetailProject.getAction(proj.project.projId)}">
+									<p:graphicImage style="width: 20px;height: 20px; float: right;"
+										value="/images/folder_search.png" />
+								</p:commandLink>
+								<p:panelGrid columns="2"
+									style="width:150px; height: 300px; font-size: 12px;"
+									cellpadding="3" columnClasses="label,value">
+									<h:outputLabel value="Describle: " />
+									<p:outputLabel value="#{proj.project.describle}" />
+									<p:outputLabel value="Join date: " />
+									<p:outputLabel value="#{proj.aStartDate}" />
+									<p:outputLabel value="Out date: " />
+									<p:outputLabel value="#{proj.aEndDate}" />
+									<p:outputLabel value="Bill amount: " />
+									<p:outputLabel value="#{proj.billAmount}" />
+									<p:outputLabel value="Assign type: " />
+									<p:outputLabel value="#{proj.assignType}" />
+									<p:outputLabel value="Hours: " />
+									<p:outputLabel value="#{proj.hours}" />
+								</p:panelGrid>
+							</p:panelGrid>
+						</p:carousel>
+					</h:form>
+				</div>
+			</center>
+		</div>
+	</div>
+</h:body>
+</html>

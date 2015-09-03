@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Manager Home</title>
+	<h:outputStylesheet name="grid/grid.css" library="primefaces" />
+</h:head>
+<h:body style="background-color: #69f0ae; width: auto;">
+	<div class="ui-grid ui-grid-responsive">
+		<div style="background-color: #880e4f; width: 100%">
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-4">
+					<p:graphicImage value="/images/fpt1.png"
+						style="margin-left: 10px; height: 80px;margin-top: 10px;margin-bottom: 10px;" />
+				</div>
+				<div class="ui-grid-col-7">
+					<h:form style="font-size: 14px;">
+						<p:fieldset style="margin-top: 50px;">
+
+							<div class="ui-grid-col-2">
+								<p:commandLink value="Home Page"
+									style="width: 100%;margin-left: 5px; color: #e65100;" />
+							</div>
+							<div class="ui-grid-col-2">
+								<p:commandLink value="Projects"
+									action="#{viewProject.getAction}"
+									style="width: 100%;margin-left: 15px; color: #e65100;" />
+							</div>
+							<div class="ui-grid-col-2">
+								<p:commandLink value="Employees"
+									action="#{employeeManager.getAction}"
+									style="width: 100%;margin-left: 15px; color: #e65100;" />
+							</div>
+							<div class="ui-grid-col-2">
+								<p:commandLink value="Sal-emp"
+									style="width: 100%;margin-left: 15px; color: #e65100;" />
+							</div>
+							<div class="ui-grid-col-2">
+								<p:commandLink value="Department"
+									style="width: 100%;margin-left: 15px; color: #e65100;" />
+							</div>
+							<div class="ui-grid-col-2">
+								<p:commandLink value="My Profile"
+									action="#{viewProfile.getAction}"
+									style="width: 100%;margin-left: 15px;color: #e65100;" />
+							</div>
+						</p:fieldset>
+					</h:form>
+				</div>
+				<div class="ui-grid-col-1">
+					<h:form>
+						<div class="ui-grid-row">
+							<h:commandButton image="/images/password_icon.png"
+								action="#{navigate.aChangePassword}"
+								style="margin-top:10px; width:70px; height: 40px;margin-left: 10px;" />
+						</div>
+						<div class="ui-grid-row">
+							<h:commandButton image="/images/logout.png"
+								action="#{navigate.logout}"
+								style="margin-top:20px; width:30px; height: 30px;margin-left: 10px;margin-bottom: 30px;" />
+						</div>
+					</h:form>
+				</div>
+			</div>
+		</div>
+		<div class="ui-grid-row">
+			<hr style="width: 2000px;"></hr>
+		</div>
+		<div class="ui-grid-row">
+			<center
+				style="margin-left: auto; margin-right: auto; margin-top: 3px; margin-bottom: 3px; text-align: center;">
+				<p:fieldset style="">
+
+				</p:fieldset>
+			</center>
+		</div>
+	</div>
+</h:body>
+</html>

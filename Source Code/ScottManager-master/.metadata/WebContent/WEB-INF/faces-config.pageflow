@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14329987733180" configfile="/ScottManager/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="Views/Share/index.xhtml" x="122" y="562" id="pf14330815566520" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14332211377013 pf14332211377014 pf14332211377015" path="Views/Share/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="Views/Share/logout.xhtml?faces-redirect=true" x="122" y="946" id="pf14330816263228" referenceLink="//@navigationRule.0/@navigationCase.3/@toViewId|" path="Views/Share/logout.xhtml?faces-redirect=true"/>
+  <nodes xsi:type="pageflow:PFPage" name="Views/Pesonalized/prehome.xhtml" id="pf14332211277940" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14332211277941" path="/Views/Personalized/prehome.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="Views/Share/profile.xhtml" id="pf14332211277942" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf14332211277941" path="/Views/Share/profile.xhtml?faces-redirect=true"/>
+  <nodes xsi:type="pageflow:PFPage" name="Views/Personalized/otherhome.xhtml?faces-redirect=true" id="pf14332211377026" referenceLink="//@navigationRule.0/@navigationCase.2/@toViewId|" inlinks="pf14332211377013" path="Views/Personalized/otherhome.xhtml?faces-redirect=true"/>
+  <nodes xsi:type="pageflow:PFPage" name="Views/Personalized/manhome.xhtml?faces-redirect=true" id="pf14332211377027" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf14332211377014" path="Views/Personalized/manhome.xhtml?faces-redirect=true"/>
+  <nodes xsi:type="pageflow:PFPage" name="Views/Personalized/prehome.xhtml" id="pf14332211377028" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14332211377015" path="Views/Personalized/prehome.xhtml?faces-redirect=true"/>
+  <links id="pf14332211277941" target="pf14332211277942" source="pf14332211277940" outcome="viewprofile"/>
+  <links id="pf14332211377013" target="pf14332211377026" source="pf14330815566520" outcome="otherhome"/>
+  <links id="pf14332211377014" target="pf14332211377027" source="pf14330815566520" outcome="managerhome"/>
+  <links id="pf14332211377015" target="pf14332211377028" source="pf14330815566520" outcome="presidenthome"/>
+</pageflow:Pageflow>
